@@ -1,12 +1,15 @@
+
 CC = gcc
-CFLAGS = -std=c11 -Wall -Wextra -Wpedantic -g
-TARGET = astronomicos
-OBJ = main.o Lista.o
+CFLAGS = -std=c11 -Wall -Wextra -Wpedantic
+TARGET = main
+OBJS = main.o Lista.o
+
+.PHONY: all run clean
 
 all: $(TARGET)
 
-$(TARGET): $(OBJ)
-	$(CC) $(CFLAGS) -o $@ $(OBJ)
+$(TARGET): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(TARGET)
 
 main.o: main.c Lista.h
 	$(CC) $(CFLAGS) -c main.c
@@ -18,6 +21,4 @@ run: $(TARGET)
 	./$(TARGET)
 
 clean:
-	rm -f $(OBJ) $(TARGET)
-
-.PHONY: all run clean
+	rm -f $(OBJS) $(TARGET)
